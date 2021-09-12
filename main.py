@@ -50,7 +50,7 @@ elif operation == 2:
     elif option == 1:
         print("decode Elias-Gama")
     elif option == 2:
-        print("decode Fibonacci")
+        codification.Fibonacci.decode(file)
     elif option == 3:
         codification.unaria.decode(file)
     elif option == 4:
