@@ -1,4 +1,5 @@
 import codification.Golomb
+import codification.Fibonacci
 
 def menu():
     print("[1] Golomb")
@@ -17,7 +18,7 @@ while option != 0:
     elif option == 2:
         print("2")
     elif option == 3:
-        print("3")
+        codification.Fibonacci.encode()
     elif option == 4:
         print("4")
     elif option == 5:
