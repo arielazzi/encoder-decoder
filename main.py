@@ -1,6 +1,8 @@
 import codification.Golomb
 import codification.elias_gama
 import codification.unaria
+import codification.Fibonacci
+
 import utils
 
 
@@ -32,7 +34,7 @@ if operation == 1:
     elif option == 2:
         codification.elias_gama.encode(file)
     elif option == 3:
-        print("3")
+        codification.Fibonacci.encode()
     elif option == 4:
         codification.unaria.encode(file)
     elif option == 5:
