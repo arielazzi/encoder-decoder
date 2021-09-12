@@ -1,11 +1,7 @@
 import math
 
 from os import environ
-def encode():
-    try:
-        file = open(input("Caminho do arquivo: "), 'r')
-    except FileNotFoundError:
-        print("Arquivo não existe, digite um caminho válido! ")
+def encode(file):
 
     stopBit = 1
     encodedText = ""

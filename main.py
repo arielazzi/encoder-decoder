@@ -30,11 +30,11 @@ if operation == 1:
     menu()
     option = int(input("Escolha o método para realizar a codificação: "))
     if option == 1:
-        codification.Golomb.encode()
+        codification.Golomb.encode(file)
     elif option == 2:
         codification.elias_gama.encode(file)
     elif option == 3:
-        codification.Fibonacci.encode()
+        codification.Fibonacci.encode(file)
     elif option == 4:
         codification.unaria.encode(file)
     elif option == 5:

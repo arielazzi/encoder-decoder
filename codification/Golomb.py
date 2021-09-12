@@ -1,12 +1,8 @@
 import math
 
 from os import environ
-def encode():
+def encode(file):
     divider = int(input("Divisor que será utilizado: "))
-    try:
-        file = open(input("Caminho do arquivo: "), 'r')
-    except FileNotFoundError:
-        print("Arquivo não existe, digite um caminho válido! ")
 
     stopBit = 1
     sufixoSize = math.log(divider, 2)
@@ -28,11 +24,11 @@ def encode():
         encodedText += prefixo + str(stopBit) + sufixo
 
     newFile = open(file.name + '.cod', 'w+')
-    newFile.writelines(str(0) + str(divider) + encodedText)    
+    newFile.writelines(str(0) + str(divider) + encodedText)
     print("Codificaçâo salva no arquivo: " + newFile.name)
     newFile.close()
 
-        
 
 
-    
+
+
