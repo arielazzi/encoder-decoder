@@ -48,7 +48,7 @@ elif operation == 2:
     if option == 0:
         print("decode Golomb")
     elif option == 1:
-        print("decode Elias-Gama")
+        codification.elias_gama.decode(file)
     elif option == 2:
         codification.Fibonacci.decode(file)
     elif option == 3:
