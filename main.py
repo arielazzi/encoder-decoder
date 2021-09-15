@@ -45,15 +45,15 @@ elif operation == 2:
     file_content = file.read()
     option = int(file_content[0])
     file.seek(2)
-    if option == 0:
+    if option == 48:
         print("decode Golomb")
-    elif option == 1:
+    elif option == 49:
         codification.elias_gama.decode(file)
-    elif option == 2:
+    elif option == 50:
         codification.Fibonacci.decode(file)
-    elif option == 3:
+    elif option == 51:
         codification.unaria.decode(file)
-    elif option == 4:
+    elif option == 52:
         print("decode Delta")
     else:
         operation = int(input("Por favor, digite uma operação válida! "))

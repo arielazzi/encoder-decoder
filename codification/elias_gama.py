@@ -8,7 +8,8 @@ def encode(file):
     encoded_text = ""
 
     for letter in range(0, len(file_content)):
-        ascii_char = ord(file_content[letter])
+        print(file_content[letter])
+        ascii_char = file_content[letter]
         higher_pow = int(math.log(ascii_char, 2))
         prefix = bin(0)[2:].zfill(higher_pow)
         suffix = bin(int(ascii_char - math.pow(2, higher_pow)))[2:].zfill(int(higher_pow))
