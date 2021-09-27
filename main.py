@@ -2,6 +2,7 @@ import codification.Golomb
 import codification.elias_gama
 import codification.unaria
 import codification.Fibonacci
+import codification.delta
 
 import utils
 
@@ -38,7 +39,7 @@ if operation == 1:
     elif option == 4:
         codification.unaria.encode(file)
     elif option == 5:
-        print("5")
+        codification.delta.encode(file)
     else:
         option = int(input("Por favor, digite um método válido! "))
 elif operation == 2:
@@ -56,7 +57,7 @@ elif operation == 2:
     elif option == 51:
         codification.unaria.decode(file)
     elif option == 52:
-        print("decode Delta")
+        codification.delta.decode(file)
     else:
         operation = int(input("Por favor, digite uma operação válida! "))
 
