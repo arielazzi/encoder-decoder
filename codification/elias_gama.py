@@ -15,8 +15,8 @@ def encode(file):
         suffix = bin(int(ascii_char - math.pow(2, higher_pow)))[2:].zfill(int(higher_pow))
         encoded_text += prefix + str(stop_bit) + suffix
 
-    new_file = open(file.name + '.cod', 'w+')
-    new_file.writelines(str(10) + encoded_text)
+    new_file = open(file.name + '.cod', 'w+b')
+    new_file.write(int_to_bytes(int(str(10) + encoded_text)))
     print("Codificaçâo salva no arquivo: " + new_file.name)
     new_file.close()
 
@@ -41,3 +41,8 @@ def decode(file):
     new_file.writelines(decoded_text)
     print("Decodificaçâo salva no arquivo: " + new_file.name)
     new_file.close()
+
+
+def int_to_bytes(number: int) -> bytes:
+    return number.to_bytes(length=(8 + (number + (number < 0)).bit_length()) // 8, byteorder='big', signed=True)
+
