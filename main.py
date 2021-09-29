@@ -44,9 +44,11 @@ if operation == 1:
 elif operation == 2:
     file_content = file.read()
     option = int(file_content[0])
+    golombDivider = file_content[1]
     file.seek(2)
+
     if option == 48:
-        print("decode Golomb")
+        codification.Golomb.decode(file, golombDivider)
     elif option == 49:
         codification.elias_gama.decode(file)
     elif option == 50:
