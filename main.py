@@ -42,20 +42,17 @@ if operation == 1:
     else:
         option = int(input("Por favor, digite um método válido! "))
 elif operation == 2:
-    file_content = file.read()
-    option = int(file_content[0])
-    golombDivider = file_content[1]
-    file.seek(2)
-
-    if option == 48:
-        codification.Golomb.decode(file, golombDivider)
-    elif option == 49:
+    option = int.from_bytes(file.read(1), 'big')
+    golomb_divider = file.read(1)
+    if option == 0:
+        codification.Golomb.decode(file, golomb_divider)
+    elif option == 1:
         codification.elias_gama.decode(file)
-    elif option == 50:
+    elif option == 2:
         codification.Fibonacci.decode(file)
-    elif option == 51:
+    elif option == 3:
         codification.unaria.decode(file)
-    elif option == 52:
+    elif option == 4:
         print("decode Delta")
     else:
         operation = int(input("Por favor, digite uma operação válida! "))
