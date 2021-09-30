@@ -35,9 +35,9 @@ def decode(file):
             total = 0
         i += 1
 
-    new_file = open(file.name[:len(file.name) - 8] + '_decoded.txt', 'w+')
-    new_file.writelines(decoded_text)
-    print("Decodificaçâo salva no arquivo: " + new_file.name)
+    new_file = open(file.name[:len(file.name) - 8] + '_decoded.txt', 'w', newline='')
+    new_file.write(decoded_text)
+    print("Decodificação salva no arquivo: " + new_file.name)
     new_file.close()
 
 

@@ -43,7 +43,7 @@ if operation == 1:
         option = int(input("Por favor, digite um método válido! "))
 elif operation == 2:
     option = int.from_bytes(file.read(1), 'big')
-    golomb_divider = file.read(1)
+    golomb_divider = int.from_bytes(file.read(1), 'big')
     if option == 0:
         codification.Golomb.decode(file, golomb_divider)
     elif option == 1:
