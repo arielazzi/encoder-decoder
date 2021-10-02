@@ -1,8 +1,7 @@
-import codification.Golomb
-import codification.elias_gama
-import codification.unaria
 import codification.Fibonacci
-
+import codification.Golomb
+import codification.elias_gamma
+import codification.unaria
 import utils
 
 
@@ -32,7 +31,7 @@ if operation == 1:
     if option == 1:
         codification.Golomb.encode(file)
     elif option == 2:
-        codification.elias_gama.encode(file)
+        codification.elias_gamma.encode(file)
     elif option == 3:
         codification.Fibonacci.encode(file)
     elif option == 4:
@@ -47,7 +46,7 @@ elif operation == 2:
     if option == 0:
         codification.Golomb.decode(file, golomb_divider)
     elif option == 1:
-        codification.elias_gama.decode(file)
+        codification.elias_gamma.decode(file)
     elif option == 2:
         codification.Fibonacci.decode(file)
     elif option == 3:

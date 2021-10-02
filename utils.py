@@ -19,7 +19,17 @@ def write_file_in_bytes(encoded_text, file_name):
     new_file.close()
 
 
-def int_to_bytes(number: int) -> bytes:
+def write_text_in_file(file, encoded_text, final=False):
+    while len(encoded_text) >= 8:
+        file.write(int_to_bytes(encoded_text[:8]))
+        encoded_text = encoded_text[8:]
+    if final:
+        if 0 < len(encoded_text) < 8:
+            file.write(int_to_bytes(encoded_text.ljust(8, '0')))
+    return encoded_text
+
+
+def int_to_bytes(number) -> bytes:
     return bytes([int(number[:8], 2)])
 
 
