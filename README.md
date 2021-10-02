@@ -16,6 +16,8 @@
 - [ ] Unária
 - [ ] Delta
 
-## Tratamento de Ruído
+## Tratamento de Erro/Ruído
 
-- [ ] Cálculo CRC-8 
+- [ ] Cálculo CRC-8
+- [ ] Codewords Hamming
+- [ ] Tratamento de Erro Hamming
