@@ -2,7 +2,6 @@ import math
 
 import utils
 
-
 def encode(file):
     file_content = file.read()
     stop_bit = 1

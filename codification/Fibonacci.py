@@ -1,4 +1,5 @@
 import math
+import utils
 
 from os import environ
 def encode(file):
@@ -8,12 +9,14 @@ def encode(file):
     encodedChar = ""
     seqFibonacci = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
     soma = 0
+    codification_type = "00000010"  # Fibonacci
+    golomb_divider = "00000000"  # Used only in Golomb encoding
 
     fileContent = file.read()
     for letter in range(0, len(fileContent)):
 
-        asciiCharValue = ord(fileContent[letter])
-        print("Letra: "+str(asciiCharValue))
+        asciiCharValue = fileContent[letter]
+        print("Letra: "+ str(asciiCharValue))
         soma = asciiCharValue
 
         for numFibonacci in reversed(seqFibonacci):
@@ -27,31 +30,27 @@ def encode(file):
         encodedText += encodedChar[::-1] + str(stopBit)
         print(encodedChar[::-1])
         encodedChar = ""
+    print("Codificação salva no arquivo: " + file.name + '.cod')
 
-    newFile = open(file.name + '.cod', 'w+')
-    newFile.writelines(str(2) + str(0) + encodedText)
-    newFile.close()
+    utils.write_file_in_bytes(codification_type + golomb_divider + encodedText, file.name)
 
 def decode(file):
 
-    encodedText = ""
+    decodedText = ""
     encodedChar = ""
     seqFibonacci = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
     anterior = 0
     soma = 0
     indice = 0
 
-    fileContent = file.read()
+    fileContent =  utils.binary_file_to_string(file)
 
-    print(fileContent)
     for letter in range(0, len(fileContent)):
 
         asciiCharValue = ord(fileContent[letter])
 
-        print(asciiCharValue)
-
         if(anterior == 49 & asciiCharValue == 49):
-            encodedText += chr(soma)
+            decodedText += chr(soma)
             soma = 0
             indice = 0
             asciiCharValue = 0
@@ -61,11 +60,11 @@ def decode(file):
             indice += 1
 
         anterior = asciiCharValue
-    print(encodedText)
 
-    newFile = open(file.name + '.txt', 'w+')
-    newFile.writelines(encodedText)
-    newFile.close()
+    new_file = open(file.name[:len(file.name) - 8] + '_decoded.txt', 'w', newline='')
+    new_file.write(decodedText)
+    print("Decodificação salva no arquivo: " + new_file.name)
+    new_file.close()
         
 
 
