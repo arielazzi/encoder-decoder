@@ -16,7 +16,7 @@ def encode(file):
         current_character = file_content[i]
         encoded_text += character
 
-    codification_type = "00000101"
+    codification_type = "00000100"
     golomb_divider = "00000000"  # Used only in Golomb encoding
     utils.write_file_in_bytes(codification_type + golomb_divider + encoded_text, file.name)
     print("Codificação salva no arquivo: " + file.name + '.cod')
