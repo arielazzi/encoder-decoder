@@ -8,11 +8,11 @@ def encode(file):
 
     for i in range(0, len(file_content)):
         if current_character != file_content[i] and i == 0:
-            character = format(file_content[i], "b") 
+            character = bin(file_content[i])[2:].zfill(8)
         elif current_character != file_content[i]:
-            character = format(1, "b") + format(file_content[i], "b") 
+            character = bin(1)[2:].zfill(8) + bin(file_content[i])[2:].zfill(8)
         else:
-            character = format(0, "b")
+            character = bin(0)[2:].zfill(8)
         current_character = file_content[i]
         encoded_text += character
 
@@ -22,4 +22,5 @@ def encode(file):
     print("Codificação salva no arquivo: " + file.name + '.cod')
 
 def decode(file):
-    print("Decodificação Delta")
+    file_content = utils.binary_file_to_string(file)
+    print(file_content)
