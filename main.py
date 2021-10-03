@@ -2,12 +2,8 @@ import codification.Fibonacci
 import codification.Golomb
 import codification.elias_gamma
 import codification.unaria
-<<<<<<< HEAD
-import codification.Fibonacci
 import codification.delta
 
-=======
->>>>>>> main
 import utils
 
 
