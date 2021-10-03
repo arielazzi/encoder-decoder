@@ -1,18 +1,19 @@
+import utils
+
 def encode(file):
     file_content = file.read()
 
+    codification_type = '00000101'
+    golomb_divider = '00000000'
+
     encoded_text = ''
-    current_character = ''
 
     for i in range(0, len(file_content)):
-        character = bin(file_content[i]) if current_character != file_content[i] else bin(0)
-        current_character = file_content[i]
-        encoded_text += character
+        print(file_content[i])
+        print(bin(file_content[i]))
+        encoded_text += bin(file_content[i])
 
-    new_file = open(file.name + '.cod', 'w+')
-    new_file.writelines(str(50) + encoded_text)
-    print('Codificação salva no arquivo: ' + new_file.name)
-    new_file.close()
+    utils.write_file_in_bytes(codification_type + golomb_divider + encoded_text, file.name)
 
 def decode(file):
-    print("Decodificação Delta")
+    print('Decode Delta')

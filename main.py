@@ -54,7 +54,7 @@ elif operation == 2:
     elif option == 3:
         codification.unaria.decode(file)
     elif option == 4:
-        print("decode Delta")
+        codification.delta.decode(file)
     else:
         operation = int(input("Por favor, digite uma operação válida! "))
 
