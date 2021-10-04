@@ -15,6 +15,7 @@ def encode(file):
             character = bin(0)[2:].zfill(8)
         current_character = file_content[i]
         encoded_text += character
+        print(encoded_text)
 
     codification_type = "00000100"
     golomb_divider = "00000000"  # Used only in Golomb encoding
@@ -26,13 +27,26 @@ def decode(file):
 
     decoded_text = ""
     current_character_to_decode = ""
-    counter = 0
 
-    for i in range(0, len(file_content)):
-        if counter < 8:
-            current_character_to_decode += file_content[i]
-            counter += 1
-        else:
-            print(current_character_to_decode)
-            current_character_to_decode = ""
-            counter = 0
+    inferior_limit = 0
+    upper_limit = 8
+    
+    max_limit = len(file_content)
+
+    last_character_as_chr = ""
+
+    while upper_limit <= max_limit:
+        current_character_to_decode = file_content[inferior_limit:upper_limit]
+
+        inferior_limit = upper_limit
+        upper_limit += 8
+
+        current_character_as_int = int(current_character_to_decode, 2)
+
+        if current_character_as_int != 0 and current_character_as_int != 1:
+            current_character_as_chr = chr(current_character_as_int)
+            decoded_text += current_character_as_chr 
+            last_character_as_chr = current_character_as_chr
+
+        elif current_character_as_int == 0:
+            decoded_text += last_character_as_chr
