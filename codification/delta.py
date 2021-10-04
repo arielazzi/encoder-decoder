@@ -15,7 +15,6 @@ def encode(file):
             character = bin(0)[2:].zfill(8)
         current_character = file_content[i]
         encoded_text += character
-        print(encoded_text)
 
     codification_type = "00000100"
     golomb_divider = "00000000"  # Used only in Golomb encoding
@@ -50,3 +49,8 @@ def decode(file):
 
         elif current_character_as_int == 0:
             decoded_text += last_character_as_chr
+    
+    new_file = open(file.name[:len(file.name) - 8] + '_decoded.txt', 'w', newline='')
+    new_file.write(decoded_text)
+    print("Decodificação salva no arquivo: " + new_file.name)
+    new_file.close()
