@@ -1,4 +1,5 @@
 import math
+import ErrorCorrectionCode
 import utils
 
 from os import environ
@@ -23,10 +24,12 @@ def encode(file):
     codification_type = "00000000"  # Golomb
     
     utils.write_file_in_bytes(codification_type + bin(divider)[2:].zfill(8) + encodedText, file.name)
-    print("Codificação salva no arquivo: " + file.name + '.cod')
+    print("Gerando arquivo .ecc... ")
+    ErrorCorrectionCode.generateECC(open(file.name + ".cod", 'rb'))
+    #print("Decodificando para" + file.name + ".cod... ")
     
-
 def decode(file, divider):
+    #faz o tratamento de erross
     fileContent = utils.binary_file_to_string(file)
     print(fileContent)
     prefixTotal = 0 # quantidade de 0 no prefixo
