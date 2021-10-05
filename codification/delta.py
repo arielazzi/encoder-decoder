@@ -1,6 +1,7 @@
 import utils
 
 def encode(file):
+    print("\nIniciando codificação delta, esse processo pode demorar um pouco...\n")
     file_content = file.read()
 
     encoded_text = ""
