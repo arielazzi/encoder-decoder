@@ -5,7 +5,6 @@ def generateECC(file):
 
     hexResultCRC = calculateCRC(decimalFirstBitCRC, decimalSecondBitCRC)
     byteResultCRC = bin(int(hexResultCRC, 16))[2:].zfill(8)
-
     encodedText = str(decimalFirstBitCRC) + str(decimalSecondBitCRC) + str(byteResultCRC)
     
     #implementar o hamming aqui?
@@ -15,13 +14,9 @@ def generateECC(file):
 def calculateCRC(firstBit, secondBit):
     CRCdivider = "100000111"
 
-    hexFirstBitCRC = hex(firstBit).split('x')[-1]
-    hexSecondBitCRC = hex(secondBit).split('x')[-1]
-
-    binFirstBitCRC = bin(int(hexFirstBitCRC, 16))[2:].zfill(8)
-    binSecondBitCRC = bin(int(hexSecondBitCRC, 16))[2:].zfill(8)
-
-    CRCdividend = str(binFirstBitCRC) + str(binSecondBitCRC) + str(bin(0)[2:].zfill(8))
+    binFirstBitCRC = bin(firstBit)[2:].zfill(8)
+    binSecondBitCRC = bin(secondBit)[2:].zfill(8)
+    CRCdividend = binFirstBitCRC + binSecondBitCRC + bin(0)[2:].zfill(8)
     CRCdividend = removeZeros(CRCdividend)
     stop = False
     result = CRCdividend
@@ -35,9 +30,9 @@ def calculateCRC(firstBit, secondBit):
                 byteFinal += str(int(CRCdivider[bit]) ^ int(result[bit]))
             #remove zeros da esquerda
             byteFinal = removeZeros(byteFinal)
-
             #adiciona zeros restantes no byteFinal
-            dif = len(CRCdividend) - len(CRCdivider)
+            dif = len(CRCdivider) - len(byteFinal) 
+            dif = len(CRCdividend) - len(CRCdivider) < dif and len(CRCdividend) - len(CRCdivider) or dif
             i = 0
             while (i < dif):
                 byteFinal += '0'
