@@ -1,4 +1,5 @@
 import utils
+from datetime import datetime
 
 
 def encode(file):
@@ -33,5 +34,13 @@ def decode(file):
     i = 0
     print(file_content)
     while i < len(file_content):
-        print(file_content[i])
-        i += 1
+        print(file_content[i:i+8])
+        op1 = calc_parity_bit(file_content[i], file_content[i + 1], file_content[i + 2]) == file_content[i+4]
+        op2 = calc_parity_bit(file_content[i + 1], file_content[i + 2], file_content[i + 3]) == file_content[i+5]
+        op3 = calc_parity_bit(file_content[i], file_content[i + 2], file_content[i + 3]) == file_content[i+6]
+
+        if not op1 and not op2 and not op3:
+            log = open('log.txt', 'w+')
+            log.writelines('[' + str(datetime.now()) + ']' + ' um erro aconteceu, se tu nao sabe, nem eu')
+            print("erro")
+        i += 8
