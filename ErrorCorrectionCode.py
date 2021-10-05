@@ -1,15 +1,25 @@
+import codification.hamming
+import utils 
+
 def generateECC(file):
     fileContent = file.read()
+
+    # calcular o CRC
     decimalFirstBitCRC = int(fileContent[0])
     decimalSecondBitCRC = int(fileContent[1])
 
     hexResultCRC = calculateCRC(decimalFirstBitCRC, decimalSecondBitCRC)
     byteResultCRC = bin(int(hexResultCRC, 16))[2:].zfill(8)
     encodedText = str(decimalFirstBitCRC) + str(decimalSecondBitCRC) + str(byteResultCRC)
+
+    # encode hamming
+    hammingBits = codification.hamming.encode(file)
+    encodedText += hammingBits 
     
-    #implementar o hamming aqui?
-    for letter in range(2, len(fileContent)):
-        encodedText += fileContent[letter]
+    # gera arquivo.ecc
+    utils.write_file_in_bytes_ecc(encodedText, file.name)
+    print("Gerando arquivo .cod... ")
+
     
 def calculateCRC(firstBit, secondBit):
     CRCdivider = "100000111"

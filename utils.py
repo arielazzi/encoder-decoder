@@ -18,6 +18,17 @@ def write_file_in_bytes(encoded_text, file_name):
 
     new_file.close()
 
+def write_file_in_bytes_ecc(encoded_text, file_name):
+    new_file = open(file_name + '.ecc', 'w+b')
+    while len(encoded_text) >= 8:
+        new_file.write(int_to_bytes(encoded_text))
+        encoded_text = encoded_text[8:]
+
+    if 0 < len(encoded_text) < 8:
+        new_file.write(int_to_bytes(encoded_text.ljust(8, '0')))
+
+    new_file.close()
+
 
 def write_text_in_file(file, encoded_text, final=False):
     while len(encoded_text) >= 8:
