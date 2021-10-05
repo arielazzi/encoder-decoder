@@ -3,6 +3,7 @@ import codification.Golomb
 import codification.elias_gamma
 import codification.unaria
 import codification.delta
+import codification.hamming
 
 import utils
 
@@ -57,5 +58,8 @@ elif operation == 2:
         codification.delta.decode(file)
     else:
         operation = int(input("Por favor, digite uma operação válida! "))
-
+elif operation == 3:
+    codification.hamming.encode(file)
+elif operation == 4:
+    codification.hamming.decode(file)
 print("Fim")
