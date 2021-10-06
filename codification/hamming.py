@@ -19,7 +19,7 @@ def encode(file):
         parity_bit += calc_parity_bit(file_content[i], file_content[i + 2], file_content[i + 3])
         asd = file_content[i:i + 4] + parity_bit
         #print(asd + '0')
-        encoded_text += str(asd)
+        encoded_text += file_content[i:i + 4] + parity_bit + '0'
         i += 4
     print('hamming', encoded_text)
     return encoded_text
@@ -38,7 +38,7 @@ def decode(file):
     print(file_content)
     output = ''
     while i < len(file_content):
-        print(file_content[i:i + 7])
+        print(file_content[i:i + 8])
         print('----')
         op5 = calc_parity_bit(file_content[i], file_content[i + 1], file_content[i + 2]) == file_content[i + 4]
         op6 = calc_parity_bit(file_content[i + 1], file_content[i + 2], file_content[i + 3]) == file_content[i + 5]
@@ -51,9 +51,9 @@ def decode(file):
             output += file_content[i] + file_content[i + 1] + file_content[i + 2] + file_content[i + 3] #+ ('1' if file_content[i + 4] == '0' else '0') + file_content[i + 5] + file_content[i + 6] + '0'
             print('----')
         else:
-            output += file_content[i:i + 4]
             print('aq', file_content[i:i + 4])
-            i += 7
+            output += file_content[i:i + 5]
+            i += 8
             continue
 
         if not op5 and not op6 and op7:  # Error on top and right
@@ -63,8 +63,8 @@ def decode(file):
             output += file_content[i] + ('1' if file_content[i + 1] == '0' else '0') + file_content[i + 2] + file_content[i + 3] # + file_content[i + 4] + file_content[i + 5] + file_content[i + 6] + '0'
             print('----')
         else:
-            output += file_content[i:i + 4]
-            i += 7
+            output += file_content[i:i + 5]
+            i += 8
             continue
 
         if not op5 and not op7 and op6:  # Error on top and left
@@ -74,8 +74,8 @@ def decode(file):
             output += ('1' if file_content[i] == '0' else '0') + file_content[i + 1] + file_content[i + 2] + file_content[i + 3] # + file_content[i + 4] + file_content[i + 5] + file_content[i + 6] + '0'
             print('----')
         else:
-            output += file_content[i:i + 4]
-            i += 7
+            output += file_content[i:i + 5]
+            i += 8
             continue
 
         if not op5 and not op6 and not op7:  # Error on top, left and right
@@ -85,8 +85,8 @@ def decode(file):
             output += file_content[i] + file_content[i + 1] + ('1' if file_content[i + 2] == '0' else '0') + file_content[i + 4] # + file_content[i + 4] + file_content[i + 5] + file_content[i + 6] + '0'
             print('----')
         else:
-            output += file_content[i:i + 4]
-            i += 7
+            output += file_content[i:i + 5]
+            i += 8
             continue
 
         if not op6 and op5 and op7:  # Error on left
@@ -96,8 +96,8 @@ def decode(file):
             output += file_content[i] + file_content[i + 1] + file_content[i + 2] + file_content[i + 3] # + file_content[i + 4] + ('1' if file_content[i + 5] == '0' else '0') + file_content[i + 6] + '0'
             print('----')
         else:
-            output += file_content[i:i + 4]
-            i += 7
+            output += file_content[i:i + 5]
+            i += 8
             continue
 
         if not op6 and not op7 and op5:  # Error on left and right
@@ -107,8 +107,8 @@ def decode(file):
             output += file_content[i] + file_content[i + 1] + file_content[i + 2] + ('1' if file_content[i + 3] == '0' else '0') #+ file_content[i + 4] + file_content[i + 5] + file_content[i + 6] + '0'
             print('----')
         else:
-            output += file_content[i:i + 4]
-            i += 7
+            output += file_content[i:i + 5]
+            i += 8
             continue
 
         if not op7 and op5 and op6:  # Error on right
@@ -118,10 +118,10 @@ def decode(file):
             output += file_content[i] + file_content[i + 1] + file_content[i + 2] + file_content[i + 3] #+ file_content[i + 4] + file_content[i + 5] + ('1' if file_content[i + 6] == '0' else '0') + '0'
             print('----')
         else:
-            output += file_content[i:i + 4]
-            i += 7
+            output += file_content[i:i + 5]
+            i += 8
             continue
 
-        i += 7
+        i += 8
     print(output)
     return output
