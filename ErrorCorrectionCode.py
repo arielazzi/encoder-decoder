@@ -39,7 +39,7 @@ def generateCODAndReturnThirdByte(file):
     decodedText = ""
     firstByte = int.from_bytes(file.read(1), 'big')
     secondByte = int.from_bytes(file.read(1), 'big')
-    thirdByte = int.from_bytes(file.read(1), 'big')
+    thirdByte = bin(int.from_bytes(file.read(1), 'big'))[2:].zfill(8)
 
     # verifica hamming e trata erros
     hammingOutPut = codification.hamming.decode(file)
