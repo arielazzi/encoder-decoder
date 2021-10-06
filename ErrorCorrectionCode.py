@@ -10,10 +10,10 @@ def generateECC(file):
 
     hexResultCRC = calculateCRC(decimalFirstBitCRC, decimalSecondBitCRC)
     byteResultCRC = bin(int(hexResultCRC, 16))[2:].zfill(8)
-    encodedText = str(decimalFirstBitCRC) + str(decimalSecondBitCRC) + str(byteResultCRC)
+    encodedText = bin(decimalFirstBitCRC)[2:].zfill(8) + bin(decimalSecondBitCRC)[2:].zfill(8) + byteResultCRC
 
     # encode hamming
-    hammingBits = codification.hamming.encode(file)
+    hammingBits = codification.hamming.encode(open(file.name, 'rb'))
     encodedText += hammingBits 
     
     # gera arquivo.ecc

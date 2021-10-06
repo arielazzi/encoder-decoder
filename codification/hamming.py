@@ -19,7 +19,7 @@ def encode(file):
         parity_bit += calc_parity_bit(file_content[i], file_content[i + 2], file_content[i + 3])
         asd = file_content[i:i + 4] + parity_bit
         #print(asd + '0')
-        encoded_text+= str(utils.int_to_bytes(asd + '0'))
+        encoded_text += str((asd + '0'))
         i += 4
     return encoded_text
 
