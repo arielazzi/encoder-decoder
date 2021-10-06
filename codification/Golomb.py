@@ -14,7 +14,6 @@ def encode(file):
     for letter in range(0, len(fileContent)):
         
         asciiCharValue = fileContent[letter]
-        #print(asciiCharValue)
 
         prefix = bin(0)[2:].zfill(asciiCharValue // divider) # n quantidade de zeros
         suffix = bin(asciiCharValue % divider)[2:].zfill(int(suffixSize)) # resto em biário com n dígitos
@@ -26,12 +25,10 @@ def encode(file):
     utils.write_file_in_bytes(codification_type + bin(divider)[2:].zfill(8) + encodedText, file.name)
     print("Gerando arquivo .ecc... ")
     ErrorCorrectionCode.generateECC(open(file.name + ".cod", 'rb'))
-    #print("Decodificando para" + file.name + ".cod... ")
     
 def decode(file, divider):
     #faz o tratamento de erross
     fileContent = utils.binary_file_to_string(file)
-    print(fileContent)
     prefixTotal = 0 # quantidade de 0 no prefixo
     suffixSize = int(math.log(divider, 2))
     letter = 0

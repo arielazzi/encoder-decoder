@@ -1,7 +1,6 @@
-import math
 import utils
+import ErrorCorrectionCode
 
-from os import environ
 def encode(file):
 
     stopBit = 1
@@ -31,13 +30,12 @@ def encode(file):
         print(encodedChar[::-1])
         encodedChar = ""
     print("Codificação salva no arquivo: " + file.name + '.cod')
-
     utils.write_file_in_bytes(codification_type + golomb_divider + encodedText, file.name)
+    ErrorCorrectionCode.generateECC(open(file.name + ".cod", 'rb'))
 
 def decode(file):
 
     decodedText = ""
-    encodedChar = ""
     seqFibonacci = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
     anterior = 0
     soma = 0
