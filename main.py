@@ -11,6 +11,8 @@ import utils
 def menu1():
     print("[1] Codificar")
     print("[2] Decodificar")
+    print("[3] Codidicar tratamento de erro")
+    print("[4] Decodificar tratamento de erro")
     print("[0] Sair")
 
 
@@ -86,6 +88,15 @@ elif operation == 3:
     ErrorCorrectionCode.generateECC(file)
 
 elif operation == 4:
+    # TODO: Tem um bit perdido no calculo do CRC
+    # TODO: Verificar se tem erro no CRC
+    option = int.from_bytes(file.read(1), 'big')
+    golomb_divider = int.from_bytes(file.read(1), 'big')
+    crc = int.from_bytes(file.read(1), 'big')
+    print(option)
+    print(golomb_divider)
+    print(crc)
+
     codification.hamming.decode(file)
 
 print("Fim")

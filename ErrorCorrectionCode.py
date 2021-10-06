@@ -18,6 +18,7 @@ def generateECC(file):
     encodedText += hammingBits 
     
     # gera arquivo.ecc
+    print(encodedText)
     utils.write_file_in_bytes_ecc(encodedText, file.name)
     print("Gerando arquivo .cod... ")
 
