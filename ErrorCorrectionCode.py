@@ -18,9 +18,9 @@ def generateECC(file):
     encodedText += hammingBits 
     
     # gera arquivo.ecc
-    print(encodedText)
+    #print(encodedText)
     utils.write_file_in_bytes_ecc(encodedText, file.name)
-    print("Gerando arquivo .cod... ")
+    print("Gerado o arquivo .ecc... ")
 
     
 def calculateCRC(firstBit, secondBit):
@@ -63,3 +63,16 @@ def removeZeros(CRCdividend):
         else:
             break
     return stringAux
+
+def verificaCRC(CRC, file):
+    # fileContent = file.read()
+    fileContent = utils.binary_file_to_string(file)
+
+    # calcular o CRC
+    decimalFirstBitCRC = int(fileContent[0:8], 2) #Transforma string binaria em decimal ex.: "00000011" -> 3
+    decimalSecondBitCRC = int(fileContent[8:16], 2)    
+
+    hexResultCRC = calculateCRC(decimalFirstBitCRC, decimalSecondBitCRC)
+
+    if (hex(int(CRC, 2)).split('x')[-1] != hexResultCRC):
+        print("Valores diferentes para CRC... decodificação não é recomendada")

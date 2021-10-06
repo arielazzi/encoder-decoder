@@ -90,13 +90,17 @@ elif operation == 3:
 elif operation == 4:
     # TODO: Tem um bit perdido no calculo do CRC
     # TODO: Verificar se tem erro no CRC
-    option = int.from_bytes(file.read(1), 'big')
-    golomb_divider = int.from_bytes(file.read(1), 'big')
-    crc = int.from_bytes(file.read(1), 'big')
-    print(option)
-    print(golomb_divider)
-    print(crc)
+    option = bin(int.from_bytes(file.read(1), 'big'))[2:].zfill(8)
+    golomb_divider = bin(int.from_bytes(file.read(1), 'big'))[2:].zfill(8)
+    crc = bin(int.from_bytes(file.read(1), 'big'))[2:].zfill(8)
 
-    codification.hamming.decode(file)
+    hamming = codification.hamming.decode(file)
+    decodedText = str(option) + str(golomb_divider) + hamming
+    utils.write_text_in_file(open(file.name.replace(".ecc",""), 'w+b'), decodedText, True)
+    print("Informações de Hamming salvas no aquivo log.txt")
+    print("Arquivo .cod final gerado")
+
+    ErrorCorrectionCode.verificaCRC(crc, open(file.name.replace(".ecc",""), 'rb'))
+
 
 print("Fim")
