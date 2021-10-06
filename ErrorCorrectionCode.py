@@ -19,7 +19,35 @@ def generateECC(file):
     # gera arquivo.ecc
     utils.write_file_in_bytes_ecc(encodedText, file.name)
     print("Gerando arquivo .cod... ")
+    thirdByte = generateCODAndReturnThirdByte(open(file.name + '.ecc', 'rb'))
+    file.close()
 
+    # faz verificação do resultado do CRC depois da decodificação do arquivo...
+    fileContent = open(file.name, 'rb')
+
+    # calcular o CRC
+    decimalFirstBitCRC = int(fileContent[0])
+    decimalSecondBitCRC = int(fileContent[1])
+
+    hexResultCRC = calculateCRC(decimalFirstBitCRC, decimalSecondBitCRC)
+
+    if(thirdByte != hexResultCRC):
+        print("Erro no cálculo do CRC. Não é recomendada a decodificação deste arquivo")
+
+
+def generateCODAndReturnThirdByte(file):
+    decodedText = ""
+    firstByte = int.from_bytes(file.read(1), 'big')
+    secondByte = int.from_bytes(file.read(1), 'big')
+    thirdByte = int.from_bytes(file.read(1), 'big')
+
+    # verifica hamming e trata erros
+    hammingOutPut = codification.hamming.decode(file)
+    decodedText += firstByte + secondByte + hammingOutPut
+    
+    # gera arquivo.ecc
+    utils.write_file_in_bytes(decodedText, file.name.replace('.cod.ecc', ''))
+    return thirdByte
     
 def calculateCRC(firstBit, secondBit):
     CRCdivider = "100000111"
