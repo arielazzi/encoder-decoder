@@ -8,13 +8,13 @@ def encode(text, output_file):
     current_character = ""
     last_character = ""
     last_character = file_content[0]
-    encoded_text += bin(last_character)[2:].zfill(8)
+    utils.write_text_in_file(output_file, bin(last_character)[2:].zfill(8)) # encode first character
     rest = ''
     for i in range(1, len(file_content)):
         current_character = file_content[i]
 
         if current_character == last_character:
-            encoded_text += bin(0)[2:].zfill(8)
+            encoded_text = bin(0)[2:].zfill(8)
         else:
             current_character_as_bin = bin(current_character)
             last_character_as_bin = bin(last_character)
@@ -25,15 +25,15 @@ def encode(text, output_file):
                 difference = abs(difference)
 
                 difference_encoded = bin(1)[2:] + bin(difference)[2:].zfill(7) #signed to represent negative diff
-                encoded_text += bin(1)[2:].zfill(8) + difference_encoded
+                encoded_text = bin(1)[2:].zfill(8) + difference_encoded
             else:
                 difference_encoded = bin(0)[2:] + bin(difference)[2:].zfill(7)
-                encoded_text += bin(1)[2:].zfill(8) + difference_encoded
+                encoded_text = bin(1)[2:].zfill(8) + difference_encoded
 
             last_character = current_character
-        # rest = utils.write_text_in_file(output_file, rest + encoded_text, (i + 1) == len(file_content))
+        rest = utils.write_text_in_file(output_file, rest + encoded_text, (i + 1) == len(file_content))
 
-    utils.write_text_in_file(output_file, encoded_text)
+    # utils.write_text_in_file(output_file, encoded_text)
     # codification_type = "00000100"
     # golomb_divider = "00000000"  # Used only in Golomb encoding
     # utils.write_file_in_bytes(codification_type + golomb_divider + encoded_text, output_file.name)
