@@ -2,11 +2,12 @@ import codification.hamming
 import utils 
 
 def generateECC(file):
-    fileContent = file.read()
+    # fileContent = file.read()
+    fileContent = utils.binary_file_to_string(file)
 
     # calcular o CRC
-    decimalFirstBitCRC = int(fileContent[0])
-    decimalSecondBitCRC = int(fileContent[1])
+    decimalFirstBitCRC = int(fileContent[0:8], 2) #Transforma string binaria em decimal ex.: "00000011" -> 3
+    decimalSecondBitCRC = int(fileContent[8:16], 2)
 
     hexResultCRC = calculateCRC(decimalFirstBitCRC, decimalSecondBitCRC)
     byteResultCRC = bin(int(hexResultCRC, 16))[2:].zfill(8)

@@ -1,10 +1,10 @@
+import ErrorCorrectionCode
 import codification.Fibonacci
 import codification.Golomb
-import codification.elias_gamma
-import codification.unaria
 import codification.delta
+import codification.elias_gamma
 import codification.hamming
-
+import codification.unaria
 import utils
 
 
@@ -19,30 +19,53 @@ operation = int(input("Escolha a operação: "))
 
 
 def menu():
-    print("[1] Golomb")
-    print("[2] Elias-Gamma")
-    print("[3] Fibonacci")
-    print("[4] Unária")
-    print("[5] Delta")
-    print("[0] Sair")
+    print("[0] Golomb")
+    print("[1] Elias-Gamma")
+    print("[2] Fibonacci")
+    print("[3] Unária")
+    print("[4] Delta")
 
 
 file = utils.load_file()
 if operation == 1:
     menu()
     option = int(input("Escolha o método para realizar a codificação: "))
-    if option == 1:
-        codification.Golomb.encode(file)
+    output_file = open(file.name + '.cod', 'w+b')
+    codification_type = bin(option)[2:].zfill(8)  # aqui pegamos a representação binaria do método (uma string)
+    utils.write_text_in_file(output_file, codification_type)
+    golomb_divider = ''
+
+    text = file.read()
+    encoded_text = ''
+    if option == 0:
+        golomb_selection = int(input("Divisor que será utilizado: "))
+        golomb_divider = bin(golomb_selection)[2:].zfill(8)
+        utils.write_text_in_file(output_file, golomb_divider)
+        encoded_text = codification.Golomb.encode(text, output_file, golomb_selection)
+        output_file.close()
+    elif option == 1:
+        golomb_divider = bin(0)[2:].zfill(8)
+        utils.write_text_in_file(output_file, golomb_divider)
+        codification.elias_gamma.encode(text, output_file)
+        output_file.close()
     elif option == 2:
-        codification.elias_gamma.encode(file)
+        golomb_divider = bin(0)[2:].zfill(8)
+        utils.write_text_in_file(output_file, golomb_divider)
+        codification.Fibonacci.encode(text, output_file)
+        output_file.close()
     elif option == 3:
-        codification.Fibonacci.encode(file)
+        golomb_divider = bin(0)[2:].zfill(8)
+        utils.write_text_in_file(output_file, golomb_divider)
+        codification.unaria.encode(text, output_file)
+        output_file.close()
     elif option == 4:
-        codification.unaria.encode(file)
-    elif option == 5:
-        codification.delta.encode(file)
+        golomb_divider = bin(0)[2:].zfill(8)
+        utils.write_text_in_file(output_file, golomb_divider)
+        codification.delta.encode(text, output_file)
+        output_file.close()
     else:
         option = int(input("Por favor, digite um método válido! "))
+
 elif operation == 2:
     option = int.from_bytes(file.read(1), 'big')
     golomb_divider = int.from_bytes(file.read(1), 'big')
@@ -58,8 +81,11 @@ elif operation == 2:
         codification.delta.decode(file)
     else:
         operation = int(input("Por favor, digite uma operação válida! "))
+
 elif operation == 3:
-    codification.hamming.encode(file)
+    ErrorCorrectionCode.generateECC(file)
+
 elif operation == 4:
     codification.hamming.decode(file)
+
 print("Fim")

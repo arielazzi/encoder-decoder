@@ -1,16 +1,15 @@
 import utils
 
-def encode(file):
+def encode(text, output_file):
     print("\nIniciando codificação delta, esse processo pode demorar um pouco...\n")
-    file_content = file.read()
+    file_content = text
 
     encoded_text = ""
     current_character = ""
     last_character = ""
-
     last_character = file_content[0]
     encoded_text += bin(last_character)[2:].zfill(8)
-
+    rest = ''
     for i in range(1, len(file_content)):
         current_character = file_content[i]
 
@@ -32,11 +31,13 @@ def encode(file):
                 encoded_text += bin(1)[2:].zfill(8) + difference_encoded
 
             last_character = current_character
+        # rest = utils.write_text_in_file(output_file, rest + encoded_text, (i + 1) == len(file_content))
 
-    codification_type = "00000100"
-    golomb_divider = "00000000"  # Used only in Golomb encoding
-    utils.write_file_in_bytes(codification_type + golomb_divider + encoded_text, file.name)
-    print("Codificação salva no arquivo: " + file.name + ".cod")
+    utils.write_text_in_file(output_file, encoded_text)
+    # codification_type = "00000100"
+    # golomb_divider = "00000000"  # Used only in Golomb encoding
+    # utils.write_file_in_bytes(codification_type + golomb_divider + encoded_text, output_file.name)
+    # print("Codificação salva no arquivo: " + output_file.name + ".cod")
 
 def decode(file):
     file_content = utils.binary_file_to_string(file)

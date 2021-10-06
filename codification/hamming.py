@@ -47,7 +47,7 @@ def decode(file):
             print("O primeiro bit de paridade está com erro")
             log.writelines('[' + str(datetime.now()) + ']' + ' O primeiro bit de paridade está errado, ajustado bit de paridade\n')
             print(file_content[i], file_content[i + 1], file_content[i + 2], file_content[i + 3], '1' if file_content[i + 4] == '0' else '0', file_content[i + 5], file_content[i + 6])  # o novo resultados
-            output += file_content[i] + file_content[i + 1] + file_content[i + 2] + file_content[i + 3] + ('1' if file_content[i + 4] == '0' else '0') + file_content[i + 5] + file_content[i + 6] + '0'
+            output += file_content[i] + file_content[i + 1] + file_content[i + 2] + file_content[i + 3] #+ ('1' if file_content[i + 4] == '0' else '0') + file_content[i + 5] + file_content[i + 6] + '0'
             print('----')
         else:
             output += file_content[i:i + 5]
@@ -58,7 +58,7 @@ def decode(file):
             print("O primeiro e o segundo bit de paridade estão com erro")
             log.writelines('[' + str(datetime.now()) + ']' + ' O primeiro e o segundo bit de paridade estão com erro\n')
             print(file_content[i], '1' if file_content[i + 1] == '0' else '0', file_content[i + 2], file_content[i + 3], file_content[i + 4], file_content[i + 5], file_content[i + 6])
-            output += file_content[i] + ('1' if file_content[i + 1] == '0' else '0') + file_content[i + 2] + file_content[i + 3] + file_content[i + 4] + file_content[i + 5] + file_content[i + 6] + '0'
+            output += file_content[i] + ('1' if file_content[i + 1] == '0' else '0') + file_content[i + 2] + file_content[i + 3] # + file_content[i + 4] + file_content[i + 5] + file_content[i + 6] + '0'
             print('----')
         else:
             output += file_content[i:i + 5]
@@ -69,7 +69,7 @@ def decode(file):
             print("O primeiro e o terceiro bit de paridade estão com erro")
             log.writelines('[' + str(datetime.now()) + ']' + ' O primeiro e o terceiro bit de paridade estão com erro\n')
             print('1' if file_content[i] == '0' else '0', file_content[i + 1], file_content[i + 2], file_content[i + 3], file_content[i + 4], file_content[i + 5], file_content[i + 6])
-            output += ('1' if file_content[i] == '0' else '0') + file_content[i + 1] + file_content[i + 2] + file_content[i + 3] + file_content[i + 4] + file_content[i + 5] + file_content[i + 6] + '0'
+            output += ('1' if file_content[i] == '0' else '0') + file_content[i + 1] + file_content[i + 2] + file_content[i + 3] # + file_content[i + 4] + file_content[i + 5] + file_content[i + 6] + '0'
             print('----')
         else:
             output += file_content[i:i + 5]
