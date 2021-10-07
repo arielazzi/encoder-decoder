@@ -2,21 +2,17 @@ import math
 
 import utils
 
-def encode(file):
-    file_content = file.read()
-    stop_bit = 1
-    encoded_text = ""
 
-    for letter in range(0, len(file_content)):
+def encode(file_content, output_file):
+    stop_bit = 1
+    rest = ''
+    for i, letter in enumerate(range(0, len(file_content))):
         ascii_char = file_content[letter] + 1
         higher_pow = int(math.log(ascii_char, 2))
         prefix = bin(0)[2:].zfill(higher_pow)
         suffix = bin(int(ascii_char - math.pow(2, higher_pow)))[2:].zfill(int(higher_pow))
-        encoded_text += prefix + str(stop_bit) + suffix
-
-    codification_type = "00000001"  # Elias-Gamma
-    golomb_divider = "00000000"  # Used only in Golomb encoding
-    utils.write_file_in_bytes(codification_type + golomb_divider + encoded_text, file.name)
+        encoded_text = prefix + str(stop_bit) + suffix
+        rest = utils.write_text_in_file(output_file, rest + encoded_text, (i + 1) == len(file_content))
 
 
 def decode(file):
@@ -38,7 +34,3 @@ def decode(file):
     new_file.write(decoded_text)
     print("Decodificação salva no arquivo: " + new_file.name)
     new_file.close()
-
-
-
-

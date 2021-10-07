@@ -1,7 +1,8 @@
 import utils
 import ErrorCorrectionCode
 
-def encode(file):
+from os import environ
+def encode(fileContent, output_file):
 
     stopBit = 1
     encodedText = ""
@@ -11,8 +12,8 @@ def encode(file):
     codification_type = "00000010"  # Fibonacci
     golomb_divider = "00000000"  # Used only in Golomb encoding
 
-    fileContent = file.read()
-    for letter in range(0, len(fileContent)):
+    rest = ''
+    for i, letter in enumerate(range(0, len(fileContent))):
 
         asciiCharValue = fileContent[letter]
         print("Letra: "+ str(asciiCharValue))
@@ -26,12 +27,10 @@ def encode(file):
                 else:
                     encodedChar += "0"
 
-        encodedText += encodedChar[::-1] + str(stopBit)
+        encodedText = encodedChar[::-1] + str(stopBit)
+        rest = utils.write_text_in_file(output_file, rest + encodedText, (i + 1) == len(fileContent))
         print(encodedChar[::-1])
         encodedChar = ""
-    print("Codificação salva no arquivo: " + file.name + '.cod')
-    utils.write_file_in_bytes(codification_type + golomb_divider + encodedText, file.name)
-    ErrorCorrectionCode.generateECC(open(file.name + ".cod", 'rb'))
 
 def decode(file):
 

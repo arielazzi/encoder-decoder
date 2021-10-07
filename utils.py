@@ -8,7 +8,7 @@ def load_file():
 
 # encoded_text = Algo tipo 000100100101
 def write_file_in_bytes(encoded_text, file_name):
-    new_file = open(file_name + '.cod', 'w+b')
+    new_file = open(file_name, 'w+b')
     while len(encoded_text) >= 8:
         new_file.write(int_to_bytes(encoded_text))
         encoded_text = encoded_text[8:]
