@@ -1,5 +1,8 @@
 # encoder-decoder
 
+## Integrantes
+Ariel Azzi, Mateus Weber, Mayara Damiani e Rayana Menezes
+
 ## Encoder
 
 - [ ] Golomb
