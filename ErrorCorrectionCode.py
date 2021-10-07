@@ -19,7 +19,7 @@ def generateECC(file):
     
     # gera arquivo.ecc
     print("Salvando arquivo .ecc...")
-    utils.write_text_in_file(open(file.name+'.ecc', 'w+b'), encodedText, True)
+    utils.write_text_in_file(open(file.name + '.ecc', 'w+b'), encodedText, True)
     print("Gerado o arquivo .ecc... ")
 
     

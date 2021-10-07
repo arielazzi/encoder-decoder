@@ -33,7 +33,6 @@ def encode(fileContent, output_file, divider):
 def decode(file, divider):
     #faz o tratamento de erross
     fileContent = utils.binary_file_to_string(file)
-    print(fileContent)
     prefixTotal = 0 # quantidade de 0 no prefixo
     suffixSize = int(math.log(divider, 2))
     letter = 0
