@@ -88,8 +88,6 @@ elif operation == 3:
     ErrorCorrectionCode.generateECC(file)
 
 elif operation == 4:
-    # TODO: Tem um bit perdido no calculo do CRC
-    # TODO: Verificar se tem erro no CRC
     option = bin(int.from_bytes(file.read(1), 'big'))[2:].zfill(8)
     golomb_divider = bin(int.from_bytes(file.read(1), 'big'))[2:].zfill(8)
     crc = bin(int.from_bytes(file.read(1), 'big'))[2:].zfill(8)

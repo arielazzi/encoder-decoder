@@ -33,12 +33,6 @@ def encode(text, output_file):
             last_character = current_character
         rest = utils.write_text_in_file(output_file, rest + encoded_text, (i + 1) == len(file_content))
 
-    # utils.write_text_in_file(output_file, encoded_text)
-    # codification_type = "00000100"
-    # golomb_divider = "00000000"  # Used only in Golomb encoding
-    # utils.write_file_in_bytes(codification_type + golomb_divider + encoded_text, output_file.name)
-    # print("Codificação salva no arquivo: " + output_file.name + ".cod")
-
 def decode(file):
     file_content = utils.binary_file_to_string(file)
 

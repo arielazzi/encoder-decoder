@@ -12,7 +12,6 @@ def encode(fileContent, output_file):
     codification_type = "00000010"  # Fibonacci
     golomb_divider = "00000000"  # Used only in Golomb encoding
 
-    # fileContent = file.read()
     rest = ''
     for i, letter in enumerate(range(0, len(fileContent))):
 
@@ -32,9 +31,6 @@ def encode(fileContent, output_file):
         rest = utils.write_text_in_file(output_file, rest + encodedText, (i + 1) == len(fileContent))
         print(encodedChar[::-1])
         encodedChar = ""
-    # print("Codificação salva no arquivo: " + file.name + '.cod')
-
-    # utils.write_file_in_bytes(codification_type + golomb_divider + encodedText, file.name)
 
 def decode(file):
 

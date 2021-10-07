@@ -2,7 +2,6 @@ import codification.hamming
 import utils 
 
 def generateECC(file):
-    # fileContent = file.read()
     fileContent = utils.binary_file_to_string(file)
 
     # calcular o CRC
@@ -64,7 +63,6 @@ def removeZeros(CRCdividend):
     return stringAux
 
 def verificaCRC(CRC, file):
-    # fileContent = file.read()
     fileContent = utils.binary_file_to_string(file)
 
     # calcular o CRC

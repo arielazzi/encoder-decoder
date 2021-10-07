@@ -21,14 +21,6 @@ def encode(fileContent, output_file, divider):
 
         encodedText = prefix + str(stopBit) + suffix
         rest = utils.write_text_in_file(output_file, rest + encodedText, (i + 1) == len(fileContent))
-
-    # return encodedText
-    # codification_type = "00000000"  # Golomb
-    
-    # utils.write_file_in_bytes(codification_type + bin(divider)[2:].zfill(8) + encodedText, file.name)
-    # print("Gerando arquivo .ecc... ")
-    # ErrorCorrectionCode.generateECC(open(file.name + ".cod", 'rb'))
-    #print("Decodificando para" + file.name + ".cod... ")
     
 def decode(file, divider):
     #faz o tratamento de erross
