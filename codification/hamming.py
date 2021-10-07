@@ -2,7 +2,6 @@ from datetime import datetime
 
 import utils
 
-
 def encode(file):
     option = int.from_bytes(file.read(1), 'big')
     golomb_divider = int.from_bytes(file.read(1), 'big')

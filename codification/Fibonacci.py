@@ -1,5 +1,5 @@
-import math
 import utils
+import ErrorCorrectionCode
 
 from os import environ
 def encode(fileContent, output_file):
@@ -35,7 +35,6 @@ def encode(fileContent, output_file):
 def decode(file):
 
     decodedText = ""
-    encodedChar = ""
     seqFibonacci = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
     anterior = 0
     soma = 0
