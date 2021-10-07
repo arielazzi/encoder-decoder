@@ -4,17 +4,14 @@ import utils
 
 from os import environ
 def encode(fileContent, output_file, divider):
-    # divider = int(input("Divisor que será utilizado: "))
 
     stopBit = 1
     suffixSize = math.log(divider, 2)
     encodedText = ""
     rest = ''
-    # fileContent = file.read()
     for i, letter in enumerate(range(0, len(fileContent))):
         
         asciiCharValue = fileContent[letter]
-        #print(asciiCharValue)
 
         prefix = bin(0)[2:].zfill(asciiCharValue // divider) # n quantidade de zeros
         suffix = bin(asciiCharValue % divider)[2:].zfill(int(suffixSize)) # resto em biário com n dígitos
