@@ -12,7 +12,7 @@ def encode(file):
     encoded_text = ""
     file_content = utils.binary_file_to_string(file)
     i = 0
-    print(file_content)
+    #print(file_content)
     while i < len(file_content):
         parity_bit = ''
         parity_bit += calc_parity_bit(file_content[i], file_content[i + 1], file_content[i + 2])
@@ -20,7 +20,7 @@ def encode(file):
         parity_bit += calc_parity_bit(file_content[i], file_content[i + 2], file_content[i + 3])
         encoded_text += file_content[i:i + 4] + parity_bit + '0'
         i += 4
-    print('hamming', encoded_text)
+    #print('hamming', encoded_text)
     return encoded_text
 
 

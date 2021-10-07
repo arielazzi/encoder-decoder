@@ -97,6 +97,7 @@ elif operation == 4:
     hamming = codification.hamming.decode(file)
     decodedText = str(option) + str(golomb_divider) + hamming
     utils.write_text_in_file(open(file.name.replace(".ecc",""), 'w+b'), decodedText, True)
+    file.close()
     print("Informações de Hamming salvas no aquivo log.txt")
     print("Arquivo .cod final gerado")
 
